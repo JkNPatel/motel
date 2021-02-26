@@ -1,0 +1,467 @@
+{% extends "index.html" %}
+
+{% block content %}
+<!-- Main content -->
+<div class="content-wrapper">
+
+	<!-- Page header -->
+	<div class="page-header page-header-light">
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4><i class="icon-home2 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
+				
+			</div>
+
+		
+		</div>
+
+	</div>
+	<!-- /page header -->
+
+	
+	<!-- Content area -->
+	<div class="content">
+		
+		{% if dic_record_a.0 == 'L' %}
+		<div class="alert alert-warning alert-styled-left alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+			<span class="font-weight-semibold">Warning!</span> Please narrow down your search. Too much Record found from NCD of Public safety.
+		</div>
+		{% endif %}
+
+		{% if dic_record_a.0 == 'N' and  dic_record_b.0 == 'N' %}
+		<div class="alert alert-danger alert-styled-left alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+			<span class="font-weight-semibold">Oh snap!</span> No record found from NCD of Public safety and MCSO.
+		</div>
+		{% endif %}
+
+		{% if dic_record_b.0 == 'T' %}
+		<div class="alert alert-danger alert-styled-left alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+			<span class="font-weight-semibold">Oh snap!</span> MCSO site has a problem in fetching data.
+		</div>
+		{% endif %}
+
+		<!-- Fieldset legend -->
+		<div class="row">
+			<div class="col-md-12">
+
+				<!-- Advanced legend -->
+				<div class="card">
+					<div class="card-header bg-dark header-elements-inline">
+						<h5 class="card-title">Inmate and Offender Search</h5>
+						<div class="header-elements">
+							<div class="list-icons">
+								<a class="list-icons-item rotate-180" data-action="collapse"></a>
+								<a class="list-icons-item" data-action="reload"></a>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="card-body">
+						<form action="" method="POST">
+							{% csrf_token %}
+							<div class="row">
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Last name*</label>
+										<input type="text" name="searchLastName" class="form-control" maxlength="35"
+											placeholder="Last name" {% if searchLastName != '' %} value="{{searchLastName}}" {% endif%}>
+
+										{% if lastname_error != null %}
+											
+										<label id="basic-error" class="validation-invalid-label" for="searchLastName">{{lastname_error}}</label>
+										{% endif %} 
+									</div>
+
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>First name*</label>
+										<input type="text" name="searchFirstName" maxlength="25" class="form-control"
+											placeholder="First name" {% if searchFirstName != '' %} value="{{searchFirstName}}" {% endif%} >
+										
+										{% if firstname_error != null %}
+										
+										<label id="basic-error" class="validation-invalid-label" for="searchFirstName">{{firstname_error}}</label>
+										{% endif %} 
+
+									</div>
+
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Birth Date*</label>
+										<input name="searchDOB" maxlength="10" class="form-control" type="date"
+											name="date" {% if searchDOB != '' %} value="{{searchDOB}}" {% endif%}>
+
+										{% if birthdate_error != null %}
+										
+										<label id="basic-error" class="validation-invalid-label" for="searchDOB">{{birthdate_error}}</label>
+										{% endif %} 
+
+									</div>
+
+								</div>
+							</div>
+
+
+							<fieldset>
+								<legend class="font-weight-semibold text-uppercase font-size-sm">
+									<a data-toggle="collapse" data-target="#demo2"><i class="fa fa-search-plus fa-lg mr-1" aria-hidden="true"></i>
+									Advance Search</a>
+									<a class="float-right text-default" data-toggle="collapse" data-target="#demo2">
+										<i class="icon-circle-down2"></i>
+									</a>
+								</legend>
+
+								<div class="collapse" id="demo2">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>M.I.</label>
+												<input type="text" maxlength="1" name="searchMiddleName"
+													class="form-control" placeholder="Middle Initial">
+												{% if middlename_error != null %}
+									
+												<label id="basic-error" class="validation-invalid-label" for="searchMiddleName">{{middlename_error}}</label>
+												{% endif %} 
+											</div>
+
+										</div>
+										<div class="col-md-4">
+
+											<div class="form-group">
+
+												<label>Gender</label>
+												<select name="searchGender" class="form-control form-control">
+													<option value="">Select</option>
+													<option value="M">Male</option>
+													<option value="F">Female</option>
+
+												</select>
+											</div>
+
+										</div>
+										<div class="col-md-4">
+
+											<div class="form-group">
+
+												<label>Race</label>
+												<select name="searchRace" class="form-control form-control">
+													<option value="">Select</option>
+													<option value="4">Asian/Ortl</option>
+													<option value="2">Black</option>
+													<option value="3">Indian</option>
+													<option value="5">Other</option>
+													<option value="6">Unknown</option>
+													<option value="1">White</option>
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+
+											<div class="form-group">
+
+												<label>Ethnic Group</label>
+												<select name="ethnicity" class="form-control form-control">
+													<option value="">Select</option>
+													<option value="07">African</option>
+													<option value="10">American Indian</option>
+													<option value="04">Asian</option>
+													<option value="02">European/N.am./Austr</option>
+													<option value="01">Hispanic/Latin</option>
+													<option value="06">Nordic/Scandanavian</option>
+													<option value="05">Oriental</option>
+													<option value="09">Other</option>
+													<option value="08">Pacific Islander</option>
+													<option value="03">Slavik (E. European)</option>
+													<option value="99">Unknown</option>
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Offender Number</label>
+												<input type="text" name="searchOffenderId" maxlength="7"
+													class="form-control" placeholder="Offender Id">
+
+												{% if offenderid_error != null %}
+									
+												<label id="basic-error" class="validation-invalid-label" for="searchOffenderId">{{offenderid_error}}</label>
+												{% endif %} 
+											</div>
+
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Birth Date Variation</label>
+												<select name="searchDOBRange" class="form-control form-control">
+													<option value="">Select</option>
+													<option value="">Exact Match</option>
+													<option value="1">+/- 1 year</option>
+													<option value="2">+/- 2 years</option>
+													<option value="3">+/- 3 years</option>
+													<option value="4">+/- 4 years</option>
+													<option value="5">+/- 5 years</option>
+													<option value="10">+/- 10 years</option>
+													<option value="15">+/- 15 years</option>
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>PID</label>
+												<input name="pid"  class="form-control" maxlength="10"
+													placeholder="pid">
+												{% if pid_error != null %}
+								
+												<label id="basic-error" class="validation-invalid-label" for="pid">{{pid_error}}</label>
+												{% endif %} 
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>JID</label>
+												<input name="jid" type="text" class="form-control" maxlength="10"
+													placeholder="jid">
+												{% if jid_error != null %}
+							
+												<label id="basic-error" class="validation-invalid-label" for="jid">{{jid_error}}</label>
+												{% endif %} 
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Prisoner Type</label>
+												<select name="PrisType" class="form-control form-control">
+													<option value="">Select</option>
+													<option value="ALL">All</option>
+													<option value="STATE">State</option>
+													<option value="FEDERAL">Federal</option>
+													<option value="BOP">Bop</option>
+													<option value="ICE">Ice</option>
+													<option value="287G">287G</option>
+
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Age Range</label>
+												<div class="row">
+													<div class="col-md-6">
+														<input name="ageMinimum" maxlength="3" type="text"
+															class="form-control" placeholder="Min Age">
+														{% if ageminimum_error != null %}
+						
+														<label id="basic-error" class="validation-invalid-label" for="ageMinimum">{{ageminimum_error}}</label>
+														{% endif %} 
+													</div>
+													<div class="col-md-6">
+														<input name="ageMaximum" maxlength="3" type="text"
+															class="form-control" placeholder="Max Age">
+														{% if agemaximum_error != null %}
+						
+														<label id="basic-error" class="validation-invalid-label" for="ageMaximum">{{agemaximum_error}}</label>
+														{% endif %} 
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+									</div>
+
+
+
+								</div>
+							</fieldset>
+
+							<div class="text-right">
+								<button type="submit" class="btn btn-dark">Search Now <i
+										class="icon-paperplane ml-2"></i></button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- /advanced legend -->
+
+			</div>
+		</div>
+		<!-- /fieldset legend -->
+
+
+	</div>
+	<!-- /content area -->
+	
+	
+	<!-- Content area for data table -->
+	<div class="content">
+
+		<!-- Basic responsive configuration -->
+		<div class="card">
+			<div class="card-header bg-dark header-elements-inline">
+				<h5 class="card-title">List of Inmates and Offenders</h5>
+				
+				<div class="header-elements">
+					<div class="list-icons">
+						<a class="list-icons-item rotate-180" data-action="collapse"></a>
+						<a class="list-icons-item" data-action="reload"></a>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+				This data is collected from <code>MCSO Search home</code> and
+				<code>NC DPS Offender Public Information</code>. This table will provide list of offenders as well as
+				inmates who are registred on this two website.
+			</div>
+
+			<table class="table datatable-responsive">
+				<thead>
+					<tr>
+						<th>Last Name</th>
+						<th>First Name</th>
+						<th>DOB</th>
+						<th>Sex</th>
+						<th>Race</th>
+						<th>Age</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					{% if dic_record_a.0 != 'N' %}
+				
+					{% for row in dic_record_a %}
+					<tr>
+						<td>{{row.1}}</td>
+						<td><a href="{% url 'offender:offender_details' %}?{{row.0}}" target="_blank">{{row.3}}</a></td>
+						<td>{{row.7}}</td>
+						<td>{{row.5}}</td>
+						<td>{{row.6}}</td>
+						<td>{{row.8}}</td>
+
+					</tr>
+					{% endfor %}
+					{% endif %} 
+
+					{% if dic_record_b.0 != 'T' %}
+					{% if dic_record_b.0 != 'N' %}
+				
+					{% for row in dic_record_b %}
+					<tr>
+						<td>{{row.1}}</td>
+						<td><a href="{% url 'offender:innmate_details' %}{{row.0 }}" target="_blank">{{row.3}}</a></td>
+						<td>{{row.7}}</td>
+						<td>
+							{% if row.5 == 'M' %}
+							MALE
+							{% else %}
+							FEMALE
+							{% endif %}
+						</td>
+						<td>{{row.6}}</td>
+						<td>{{row.8}}</td>
+
+					</tr>
+					{% endfor %}
+					{% endif %} 
+					{% endif %} 
+
+				
+					{% if record != '' %}
+				
+					{% for each_record in record %}
+					<tr>
+						<td>{{each_record.off_last_name|upper }}</td>
+						<td><a href="{% url 'offender:record_detail' each_record.id %}">{{each_record.off_first_name|upper }}</a></td>
+						<td>{{each_record.off_birth_date| date:'m/d/Y'}}</td>
+						
+						<td>
+
+							{% if each_record.off_gender == 'M' %}
+							MALE
+							{% else %}
+							FEMALE
+							{% endif %}
+
+						
+						</td>
+						<td>
+				
+
+							{% if each_record.off_race == '4' %} ASIAN/ORTL {% endif %}
+							{% if each_record.off_race == '2' %} BLACK {% endif %}
+							{% if each_record.off_race == '3' %} INDIAN {% endif %}
+							{% if each_record.off_race == '5' %} OTHER {% endif %}
+							{% if each_record.off_race == '6' %} UNKNOWN {% endif %}
+							{% if each_record.off_race == '1' %} WHITE {% endif %}
+
+							
+						
+						</td>
+						<td>{{each_record.off_age}}</td>
+
+					</tr>
+					
+					{% endfor%}
+						
+					{% endif %} 
+
+				</tbody>
+			</table>
+		</div>
+		<!-- /basic responsive configuration -->
+
+
+
+	</div>
+	<!-- /content area -->
+
+	
+
+	<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+				data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+				Keep searching, Stay Secure
+			</span>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<span class="navbar-text">
+					&copy; 2021 - <a href="#">Offender Search</a> 
+				</span>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+
+</div>
+<!-- /main content -->
+{% endblock content %}

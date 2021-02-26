@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Limitless1 - Responsive Web Application Kit by Eugene Kopyov</title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
+		type="text/css">
+	<link href="{% static 'global_assets/css/icons/icomoon/styles.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/bootstrap_limitless.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/layout.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/components.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/colors.min.css' %}" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script src="{% static 'global_assets/js/main/jquery.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/main/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/loaders/blockui.min.js' %}"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script src="{% static 'global_assets/js/plugins/visualization/d3/d3.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/visualization/d3/d3_tooltip.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/forms/styling/switchery.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/ui/moment/moment.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/pickers/daterangepicker.js' %}"></script>
+
+	<!-- Script for responsive data table -->
+	<script src="{% static 'global_assets/js/plugins/tables/datatables/datatables.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/tables/datatables/extensions/responsive.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/forms/selects/select2.min.js' %}"></script>
+
+	<script src="{% static 'global_assets/js/demo_pages/datatables_responsive.js' %}"></script>
+
+	<!-- end for data table -->
+
+	<!-- Script for login -->
+	<script src="{% static 'global_assets/js/plugins/forms/styling/uniform.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_pages/login.js' %}"></script>
+
+	<!-- end of login script -->
+
+	<!-- Theme JS files -->
+	
+
+	<!-- Form js  -->
+	<script src="{% static 'global_assets/js/plugins/forms/selects/select2.min.js' %}"></script>
+	<script src="{% static 'global_assets/js/plugins/forms/styling/uniform.min.js' %}"></script>
+
+	<script src="{% static 'global_assets/js/demo_pages/form_layouts.js' %}"></script>
+	<!-- /Form JS files -->
+
+	<script src="{% static 'assets/js/app.js' %}"></script>
+
+	<script src="{% static 'global_assets/js/demo_pages/dashboard.js' %}"></script>
+	<script src="{% static '/js/demo_charts/pages/dashboard/light/streamgraph.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/sparklines.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/lines.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/areas.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/donuts.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/bars.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/progress.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/pies.js' %}"></script>
+	<script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/bullets.js' %}"></script>
+	<!-- /theme JS files -->
+
+	<!-- script for font awesome -->
+	<script src="https://use.fontawesome.com/088b86592d.js"></script>
+
+</head>
+
+
+<body class="bg-slate-800">
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Content area -->
+			<div class="content d-flex justify-content-center align-items-center">
+
+				<!-- Login card -->
+				<form class="login-form" action="" method="POST">
+					{% csrf_token %}
+					<div class="card mb-0">
+						<div class="card-body">
+
+							
+							
+							<div class="text-center mb-3">
+								<i class="icon-people icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
+								<h5 class="mb-0">Login to your account</h5>
+								<span class="d-block text-muted">Your credentials</span>
+							</div>
+							
+							{% if login_error != null %}
+
+							<div class="alert alert-warning border-0 alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+								<span class="font-weight-semibold">Oh snap!</span> Please Enter valid credentials.
+							</div>
+
+							{% endif %}
+							<div class="form-group form-group-feedback form-group-feedback-left">
+								<input type="text" class="form-control" name="user_email" placeholder="Email address">
+								<div class="form-control-feedback">
+									<i class="icon-user text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group form-group-feedback form-group-feedback-left">
+								<input type="password" class="form-control" name="user_pass" placeholder="Password">
+								<div class="form-control-feedback">
+									<i class="icon-lock2 text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group d-flex align-items-center">
+								<div class="form-check mb-0">
+									
+								</div>
+
+								<a href="{% url 'offender:forgot_password'%}" class="ml-auto">Forgot password?</a>
+							</div>
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
+							</div>
+
+								
+
+						
+
+							<span class="form-text text-center text-muted">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> </span>
+
+						</div>
+					</div>
+				</form>
+				<!-- /login card -->
+
+			</div>
+			<!-- /content area -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+</body>
+
+</html>

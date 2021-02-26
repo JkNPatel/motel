@@ -1,0 +1,410 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- Main content -->
+<div class="content-wrapper">
+
+	<!-- Page header -->
+	<div class="page-header page-header-light">
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4><i class="icon-home2 mr-2"></i> <span class="font-weight-semibold">Home</span> - Record Details</h4>
+			</div>
+
+
+		</div>
+
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Content area -->
+	<div class="content">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+
+
+					<div class="card-header bg-dark text-white header-elements-inline">
+						<h6 class="card-title">{{record_data.off_first_name}} {{record_data.off_last_name}} </h6>
+						<div class="header-elements">
+							<div class="list-icons">
+								
+								{% if blocklist == 'B' %}
+								<a href="{% url 'offender:change_block_status' record_data.id %}"><button type="button" class="btn bg-teal btn-sm" ><i class="fa fa-check mr-1" aria-hidden="true"></i> Allow this User </button></a>	
+								
+								{% else %}
+								<a href="{% url 'offender:change_block_status' record_data.id %}"><button type="button" class="btn bg-teal btn-sm" ><i class="fa fa-ban mr-1" aria-hidden="true"></i> Block this User </button></a>
+								
+
+								{% endif %}
+
+							
+							</div>
+						</div>
+					</div>
+
+					<div class="card-body">
+
+						<div class="row">
+
+							<div class="col-md-12 p-1">
+								<div class="row">
+
+									<div class="col-md-12">
+										<form action="#">
+
+
+											<div class="row p-1">
+
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">DOB:</label>
+														<div class="form-control-plaintext">
+															{{record_data.off_birth_date}}</div>
+													</div>
+												</div>
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">Age</label>
+														<div class="form-control-plaintext">{{age}} years</div>
+													</div>
+												</div>
+
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">Gender</label>
+														<div class="form-control-plaintext">
+															{% if record_data.off_gender == 'M' %}
+															Male
+															{% else %}
+															Female
+															{% endif %}
+
+
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">Race</label>
+														<div class="form-control-plaintext">
+
+															{% if record_data.off_race == '4' %}
+															Asian/ORTL
+															{% elif record_data.off_race == '2' %}
+															Black
+															{% elif record_data.off_race == '3' %}
+															Indian
+															{% elif record_data.off_race == '5' %}
+															Other
+															{% elif record_data.off_race == '6' %}
+															Unknown
+															{% elif record_data.off_race == '1' %}
+															White
+															{% endif %}
+
+
+														</div>
+													</div>
+												</div>
+
+
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">Posted Date</label>
+														<div class="form-control-plaintext">
+															{{record_data.off_created_date.date}}</div>
+													</div>
+												</div>
+
+												<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+													<div class="form-group">
+														<label class="font-weight-semibold">Status</label>
+														<div class="form-control-plaintext">
+															{% if blocklist == 'B' %}
+															<span class="badge badge-pill badge-danger pl-2 pr-2 pt-1 pb-1">Block </span>
+															
+															{% else %}
+															<span class="badge badge-pill badge-success pl-2 pr-2 pt-1 pb-1">Allow </span>
+																
+																{% endif %}
+														</div>
+
+													</div>
+
+												</div>
+
+
+											</div>
+
+
+
+
+										</form>
+									</div>
+
+								</div>
+
+							</div>
+
+
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+		</div>
+
+
+
+		<!-- Basic responsive configuration -->
+		<div class="card">
+			<div class="card-header bg-dark header-elements-inline">
+				<h6 class="card-title">Experience History &nbsp;&nbsp;
+				</h6>
+				<div class="header-elements">
+					<div class="list-icons">
+						<button type="button" class="btn bg-teal btn-sm" data-toggle="modal"
+							data-target="#add_experience"><i class="fa fa-plus mr-1" aria-hidden="true"></i> Add New
+							Experience</button>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<table class="table datatable-responsive text-center">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>Experience
+						</th>
+						<th>Created Date</th>
+
+						<th>Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+
+					{% for each_experience in experience %}
+
+					<tr>
+						<td>{{forloop.counter}}
+						</td>
+						<td>{{each_experience.record_experience}}</td>
+
+
+
+						<td>{{each_experience.record_created_date|date:'m-d-Y'}}</td>
+
+
+
+						{% if each_experience.record_owner_id_id == request.user.id %}
+						<td class="text-center">
+
+							<button type="button" id="{{ each_experience.id  }}"
+								name="{{each_experience.record_experience}}" onclick="editRecord(this.id,this.name)"
+								class="btn btn-sm bg-primary  text-primary-800 btn-icon  rounded-round"><i
+									class="fa fa-pencil" aria-hidden="true"></i></button>&nbsp;
+							<button id="{{ each_experience.id  }}" onclick="deleteRecord(this.id)" type="button"
+								class="btn btn-sm  bg-danger-400  text-800 btn-icon rounded-round"><i
+									class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+						</td>
+						{% else %}
+						<td>
+							<i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+						</td>
+						{% endif %}
+
+
+					</tr>
+
+					{% endfor%}
+
+
+
+
+
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- form for adding experiencce -->
+		<div id="add_experience" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Add your experience</h3>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class=" mt-3 border-bottom"></div>
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="modal-body">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12">
+										<label>Describe more about experience*</label>
+										<textarea rows="3" cols="3" class="form-control" name="add_experience"
+											placeholder="Type bad experience" required></textarea>
+										<input type="text" value="{{ request.user.id }}" name="user" placeholder=""
+											class="form-control" hidden>
+										<input type="text" value="{{record_data.id}}" name="record" placeholder=""
+											class="form-control" hidden>
+
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn bg-secondary " data-dismiss="modal">Close</button>
+							<button type="submit" class="btn bg-teal">Submit form</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- adding experience form -->
+
+		<!-- editing form experiencce -->
+		<div id="edit_experience" class="modal fade" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title">Edit your experience</h3>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class=" mt-3 border-bottom"></div>
+					<form action="" method="POST">
+						{% csrf_token %}
+						<div class="modal-body">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12">
+										<label>Describe more about experience*</label>
+										<textarea rows="3" cols="3" class="form-control" name="edit_experience"
+											id="textarea_experience" placeholder="Type bad experience"
+											required>hi</textarea>
+										<input type="text" value="{{ request.user.id }}" name="user" placeholder=""
+											class="form-control" hidden>
+										<input type="text" value="" name="record" id="experience_id" placeholder=""
+											class="form-control" hidden>
+
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn bg-secondary " data-dismiss="modal">Close</button>
+							<button type="submit" class="btn bg-teal">Submit form</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /editing form experience  -->
+
+
+		<!-- delete model-->
+
+		<div class="modal fade" id="delete_model" tabindex="-1" role="dialog" 
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Are you really want to delete this record?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						This Record will be deleted Permenently!
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a id="del-btn" href="abc" class="btn btn-danger">Confirm</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- end of delete model-->
+	</div>
+	<!-- /content area -->
+
+
+
+	<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+				data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+				Keep searching, Stay Secure
+			</span>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<span class="navbar-text">
+					&copy; 2021 - <a href="#">Offender Search</a> 
+				</span>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+
+</div>
+<!-- /main content -->
+
+<script>
+	function editRecord(id, text) {
+		var current_id = id;
+		var text1 = text;
+		console.log(text1);
+		//$(".modal-footer #del-btn").attr('href', '/offender/delete-record/' + current_id);
+		$("textarea#textarea_experience").val(text1);
+		$("#experience_id").val(current_id);
+
+		$("#edit_experience").modal();
+	}
+
+	function deleteRecord(id) {
+		var current_id = id;
+
+		$(".modal-footer #del-btn").attr('href', '/offender/delete-experience/' + current_id);
+		
+		$("#delete_model").modal();
+	}
+</script>
+
+{% endblock content %}

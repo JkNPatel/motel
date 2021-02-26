@@ -1,0 +1,184 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- Main content -->
+<div class="content-wrapper">
+
+	<!-- Page header -->
+	<div class="page-header page-header-light">
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4><i class="icon-home2 mr-2"></i> <span class="font-weight-semibold">Home</span> - View Records</h4>
+			</div>
+
+
+		</div>
+
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Content area for data table -->
+	<div class="content">
+		<!--DELRCRD-->
+		<!-- Button trigger modal -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Are you really want to delete this record?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						This Record will be deleted Permenently!
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a id="del-btn" href="abc" class="btn btn-danger">Confirm</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--DELRECR END-->
+		<!-- Basic responsive configuration -->
+		<div class="card">
+			<div class="card-header bg-dark header-elements-inline">
+				<h5 class="card-title">History of bad records</h5>
+				<div class="header-elements">
+					<div class="list-icons">
+						<a class="list-icons-item rotate-180" data-action="collapse"></a>
+						<a class="list-icons-item" data-action="reload"></a>	
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+				This data is collected from records which were inserted by you for future referance.
+			</div>
+
+			<table class="table datatable-responsive">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>DOB</th>
+						<th>Sex</th>
+						<th>Race</th>
+						
+						<th>Action</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for each_record in record %}
+
+					<tr>
+						<td><a style="color:#333"
+								href="{% url 'offender:record_detail' each_record.id %}">   {{each_record.off_first_name}}&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+						</td>
+						<td>{{each_record.off_last_name}}</td>
+						<td>{{each_record.off_birth_date}}</td>
+
+						{% if each_record.off_gender == 'M' %}
+						<td>Male</td>
+						{% else %}
+						<td>Female</td>
+
+						{% endif %}
+
+						{% if each_record.off_race == '4' %}
+						<td>Asian/ORTL</td>
+						{% elif each_record.off_race == '2' %}
+						<td>Black</td>
+						{% elif each_record.off_race == '3' %}
+						<td>Indian</td>
+						{% elif each_record.off_race == '5' %}
+						<td>Other</td>
+						{% elif each_record.off_race == '6' %}
+						<td>Unknown</td>
+						{% elif each_record.off_race == '1' %}
+						<td>White</td>
+
+						{% endif %}
+
+						
+						
+
+						<td >
+							
+								<!-- 
+								<a href=""><button
+										type="button"
+										class="btn btn-sm bg-primary border-primary text-primary-800 btn-icon  rounded-round"><i
+											class="fa fa-pencil" aria-hidden="true"></i></button>
+								</a>-->
+								
+								<button id="{{ each_record.id  }}" onclick="deleteRecord(this.id)" type="button"
+									class="btn btn-sm  bg-pink-400 border-pink-400 text-800 btn-icon rounded-round"><i
+										class="fa fa-trash-o" aria-hidden="true"></i></button>
+							
+						</td>
+
+						
+
+
+					</tr>
+
+					{% endfor%}
+
+				</tbody>
+			</table>
+		</div>
+		<!-- /basic responsive configuration -->
+
+
+
+	</div>
+	<!-- /content area -->
+
+	<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+				data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+				Keep searching, Stay Secure
+			</span>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<span class="navbar-text">
+					&copy; 2021 - <a href="#">Offender Search</a> 
+				</span>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+
+</div>
+<!-- /main content -->
+<script>
+	function deleteRecord(id) {
+		var current_id = id;
+		//console.log(current_id);
+		$(".modal-footer #del-btn").attr('href', '/offender/delete-record/' + current_id);
+		$("#exampleModal").modal();
+	}
+</script>
+
+{% endblock content %}

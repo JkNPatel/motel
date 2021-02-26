@@ -1,0 +1,488 @@
+{% extends "index.html" %}
+
+{% block content %}
+<!-- Page content -->
+<div class="page-content">
+
+
+
+	<!-- Main content -->
+	<div class="content-wrapper">
+
+		<!-- Page header -->
+		<div class="page-header page-header-light">
+			<div class="page-header-content header-elements-md-inline">
+				<div class="page-title d-flex">
+					<h4><i class="icon-home2 mr-2"></i> <span class="font-weight-semibold">Home</span> - Inmate-Detail</h4>
+					<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+				</div>
+
+				
+			</div>
+
+		</div>
+		<!-- /page header -->
+
+
+		<!-- Content area -->
+		<div class="content">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+
+
+						<div class="card-header bg-dark text-white header-elements-inline">
+							<h6 class="card-title">{{record.fname}} &nbsp;{{record.lname}}</h6>
+							<div class="header-elements">
+								<div class="list-icons">
+									{% if blockllist == 'B' %}
+									<a href="{% url 'offender:change_inmate_block_status' %}?pid={{record.PID}}&jid={{record.JID}}&fname={{record.fname}}&lname={{record.lname}}&DOB={{record.DOB}}&Race={{record.Race}}&Sex={{record.Sex}}"><button type="button" class="btn bg-teal btn-sm"><i
+												class="fa fa-check mr-1" aria-hidden="true"></i> Allow this User
+										</button></a>
+
+									{% else %}
+									<a href="{% url 'offender:change_inmate_block_status' %}?pid={{record.PID}}&jid={{record.JID}}&fname={{record.fname}}&lname={{record.lname}}&DOB={{record.DOB}}&Race={{record.Race}}&Sex={{record.Sex}}"><button type="button" class="btn bg-teal btn-sm"><i
+												class="fa fa-ban mr-1" aria-hidden="true"></i> Block this User
+										</button></a>
+
+
+									{% endif %}
+								</div>
+							</div>
+						</div>
+
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-md-10 p-1">
+									<div class="row">
+
+										<div class="col-md-12">
+											<form action="#">
+
+
+												<div class="row p-1">
+
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">DOB:</label>
+															<div class="form-control-plaintext">{{record.DOB}}</div>
+														</div>
+													</div>
+
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Race:</label>
+															<div class="form-control-plaintext">{{record.Race}}</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Sex:</label>
+															<div class="form-control-plaintext">{{record.Sex}}</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Status:</label>
+															<div class="form-control-plaintext"><span
+																	class="badge badge-warning">{{record.Status}}</span>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Height:</label>
+															<div class="form-control-plaintext">{{record.Height}}</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">PID:</label>
+															<div class="form-control-plaintext">{{record.PID}}</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-4 col-sm-4 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">JID:</label>
+															<div class="form-control-plaintext">{{record.JID}}</div>
+														</div>
+													</div>
+													<div class="col-lg-2 col-md-5 col-sm-6 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Released:</label>
+															<div class="form-control-plaintext">{{record.Released}}</div>
+														</div>
+													</div>
+													<div class="col-lg-3 col-md-7 col-sm-6 col-6">
+														<div class="form-group">
+															<label class="font-weight-semibold">Address:</label>
+															<div class="form-control-plaintext">{{record.Address}}</div>
+														</div>
+													</div>
+												</div>
+
+
+
+
+											</form>
+										</div>
+
+									</div>
+
+								</div>
+
+								<div class="col-md-2 p-1">
+									<a href="{{record.image}}" target="_blank">
+										<img src="{{record.image}}"
+											class="rounded card-img-top img-fluid" width="" height="" alt="">
+									</a>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+
+					<div class="card">
+
+
+						<div class="card-header bg-dark text-white header-elements-inline">
+							<h6 class="card-title">Charges</h6>
+							<div class="header-elements">
+								<div class="list-icons">
+									<a class="list-icons-item rotate-180" data-action="collapse"></a>
+									<a class="list-icons-item" data-action="remove"></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-md-12 p-1">
+									<div class="row">
+
+										<div class="col-md-12">
+											<form action="#">
+
+
+												<div class="row p-1">
+
+													<div class="table-responsive  table-hover">
+														<table class="table text-center">
+															<thead>
+																<tr>
+																	<th>Charge/Court</th>
+																	<th>Description</th>
+																	<th>Type/Country</th>
+																	<th>Date</th>
+
+																</tr>
+															</thead>
+															<tbody>
+
+																{% for each in record.Charges %}
+
+
+
+																
+																<tr>
+																	<td>{{each.1}}</td>
+																	<td>{{each.7}}</td>
+
+																	<td>{{each.3}} </td>
+																	<td>{{each.6}}</td>
+
+																</tr>
+
+															
+
+
+																{% endfor %}
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+
+
+
+											</form>
+										</div>
+
+									</div>
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+
+
+
+					</div>
+
+					<!-- Other experience from our database -->
+					<div class="card">
+						<div class="card-header bg-dark header-elements-inline">
+							<h6 class="card-title">Experience History By Owners &nbsp;&nbsp;
+							</h6>
+							<div class="header-elements">
+								<div class="list-icons">
+									<button type="button" class="btn bg-teal btn-sm" data-toggle="modal"
+										data-target="#add_experience"><i class="fa fa-plus mr-1" aria-hidden="true"></i>
+										Add New
+										Experience</button>
+
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<table class="table datatable-responsive text-center">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Experience
+									</th>
+									<th>Created Date</th>
+
+									<th>Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+
+								{% for each_experience in experience %}
+
+								<tr>
+									<td>{{forloop.counter}}
+									</td>
+									<td>{{each_experience.mcs_off_experience}}</td>
+
+
+
+									<td>{{each_experience.mcs_off_exp_created_date|date:'m-d-Y'}}</td>
+
+
+
+									{% if each_experience.mcs_off_owner_id_id == request.user.id %}
+									<td class="text-center">
+
+										<button type="button" id="{{ each_experience.id  }}"
+											name="{{each_experience.mcs_off_experience}}"
+											onclick="editRecord(this.id,this.name)"
+											class="btn btn-sm bg-primary  text-primary-800 btn-icon  rounded-round"><i
+												class="fa fa-pencil" aria-hidden="true"></i></button>&nbsp;
+										<button id="{{ each_experience.id  }}" onclick="deleteRecord(this.id)"
+											type="button"
+											class="btn btn-sm  bg-danger-400  text-800 btn-icon rounded-round"><i
+												class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+									</td>
+									{% else %}
+									<td>
+										<i class="fa fa-ban fa-lg" aria-hidden="true"></i>
+									</td>
+									{% endif %}
+
+
+								</tr>
+
+								{% endfor%}
+
+
+
+
+
+							</tbody>
+						</table>
+					</div>
+
+					
+						<!-- form for adding experiencce -->
+						<div id="add_experience" class="modal fade" tabindex="-1">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 class="modal-title">Add your experience</h3>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class=" mt-3 border-bottom"></div>
+									<form action="" method="POST">
+										{% csrf_token %}
+										<div class="modal-body">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-sm-12">
+														<label>Describe more about experience*</label>
+														<textarea rows="3" cols="3" class="form-control"
+															name="add_experience" placeholder="Type bad experience"
+															required></textarea>
+														<input type="text" value="{{ request.user.id }}" name="user"
+															placeholder="" class="form-control" hidden>
+															<input type="text" value="{{ request.user.id }}" name="user"
+															placeholder="" class="form-control" hidden>
+														<input type="text" value="{{record.PID}}" name="pid"
+															placeholder="" class="form-control" hidden>
+															<input type="text" value="{{record.JID}}" name="jid"
+															placeholder="" class="form-control" hidden>
+	
+													</div>
+	
+	
+												</div>
+											</div>
+	
+										</div>
+	
+										<div class="modal-footer">
+											<button type="button" class="btn bg-secondary "
+												data-dismiss="modal">Close</button>
+											<button type="submit" class="btn bg-teal">Submit form</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- adding experience form -->
+	
+	
+						<!-- editing form experiencce -->
+						<div id="edit_experience" class="modal fade" tabindex="-1">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit your experience</h3>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class=" mt-3 border-bottom"></div>
+									<form action="" method="POST">
+										{% csrf_token %}
+										<div class="modal-body">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-sm-12">
+														<label>Describe more about experience*</label>
+														<textarea rows="3" cols="3" class="form-control" name="edit_experience"
+															id="textarea_experience" placeholder="Type bad experience"
+															required>hi</textarea>
+														<input type="text" value="{{ request.user.id }}" name="user" placeholder=""
+															class="form-control" hidden>
+														<input type="text" value="" name="record" id="experience_id" placeholder=""
+															class="form-control" hidden>
+	
+													</div>
+	
+	
+												</div>
+											</div>
+	
+										</div>
+	
+										<div class="modal-footer">
+											<button type="button" class="btn bg-secondary " data-dismiss="modal">Close</button>
+											<button type="submit" class="btn bg-teal">Submit form</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- /editing form experience  -->
+						
+						<!-- delete model-->
+	
+						<div class="modal fade" id="delete_model" tabindex="-1" role="dialog" 
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Are you really want to delete this record?</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									This Record will be deleted Permenently!
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<a id="del-btn" href="abc" class="btn btn-danger">Confirm</a>
+								</div>
+							</div>
+						</div>
+					</div>
+	
+					<!-- end of delete model-->
+				</div>
+
+			</div>
+
+
+
+		</div>
+		<!-- /content area -->
+
+		<script>
+			function editRecord(id, text) {
+				var current_id = id;
+				var text1 = text;
+				console.log(text1);
+				//$(".modal-footer #del-btn").attr('href', '/offender/delete-record/' + current_id);
+				$("textarea#textarea_experience").val(text1);
+				$("#experience_id").val(current_id);
+		
+				$("#edit_experience").modal();
+			}
+		
+			function deleteRecord(id) {
+				var current_id = id;
+		
+				$(".modal-footer #del-btn").attr('href', '/offender/delete-inmate-experience/' + current_id);
+				
+				$("#delete_model").modal();
+			}
+		</script>
+
+		<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+				data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+				Keep searching, Stay Secure
+			</span>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<span class="navbar-text">
+					&copy; 2021 - <a href="#">Offender Search</a> 
+				</span>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+
+	</div>
+	<!-- /main content -->
+
+</div>
+<!-- /page content -->
+{% endblock content %}

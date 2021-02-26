@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.interface.club/limitless/demo/Template/layout_1/LTR/default/full/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Feb 2021 03:07:55 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Limitless1 - Responsive Web Application Kit by Eugene Kopyov</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="{% static 'global_assets/css/icons/icomoon/styles.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/bootstrap_limitless.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/layout.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/components.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/css/colors.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+
+    <!-- Core JS files -->
+    <script src="{% static 'global_assets/js/main/jquery.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/main/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/loaders/blockui.min.js' %}"></script>
+    <!-- /core JS files -->
+
+    <!-- Theme JS files -->
+    <script src="{% static 'global_assets/js/plugins/visualization/d3/d3.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/visualization/d3/d3_tooltip.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/forms/styling/switchery.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/ui/moment/moment.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/pickers/daterangepicker.js' %}"></script>
+
+    <!-- Script for responsive data table -->
+    <script src="{% static 'global_assets/js/plugins/tables/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/tables/datatables/extensions/responsive.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/forms/selects/select2.min.js' %}"></script>
+
+    <script src="{% static 'global_assets/js/demo_pages/datatables_responsive.js' %}"></script>
+
+    <!-- end for data table -->
+
+    <!-- Script for login -->
+    <script src="{% static 'global_assets/js/plugins/forms/styling/uniform.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_pages/login.js' %}"></script>
+
+    <!-- end of login script -->
+
+    <!-- script for poppup -->
+    <script src="{% static 'global_assets/js/plugins/notifications/bootbox.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_pages/components_modals.js' %}"></script>
+
+
+
+    <!-- Form js  -->
+    <script src="{% static 'global_assets/js/plugins/forms/selects/select2.min.js' %}"></script>
+    <script src="{% static 'global_assets/js/plugins/forms/styling/uniform.min.js' %}"></script>
+
+    <script src="{% static 'global_assets/js/demo_pages/form_layouts.js' %}"></script>
+    <!-- /Form JS files -->
+
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <script src="{% static 'global_assets/js/demo_pages/dashboard.js' %}"></script>
+    <script src="{% static '/js/demo_charts/pages/dashboard/light/streamgraph.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/sparklines.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/lines.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/areas.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/donuts.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/bars.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/progress.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/pies.js' %}"></script>
+    <script src="{% static 'global_assets/js/demo_charts/pages/dashboard/light/bullets.js' %}"></script>
+    <!-- /theme JS files -->
+
+    <!-- script for font awesome -->
+    <script src="https://use.fontawesome.com/088b86592d.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Main navbar -->
+    <div class="navbar navbar-expand-md navbar-dark">
+        <div class="navbar-brand">
+            <a href="index.html" class="d-inline-block text-white">
+               
+               <h5 class="text-white"> <i class="icon-user-check"></i> &nbsp;Offender Search</h5>
+            </a>
+        </div>
+
+        <div class="d-md-none">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+				<i class="icon-tree5"></i>
+			</button>
+            <button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+				<i class="icon-paragraph-justify3"></i>
+			</button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-mobile">
+
+            <span class="badge ml-md-3 mr-md-auto"> </span>
+
+            <ul class="navbar-nav">
+
+
+
+                <li class="nav-item dropdown dropdown-user">
+                    <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                        <img src="global_assets/images/demo/users/face11.jpg" class="rounded-circle mr-2" height="34" alt="">
+                        <span><i class="fa fa-user" aria-hidden="true"></i> &nbsp;{{user.username}}</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{% url 'offender:profile' request.user.id%}" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+                        <a href="{% url 'offender:recovery_password' request.user.id%}" class="dropdown-item"><i class="icon-key"></i> Password recovery</a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="{% url 'offender:logout'%}" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /main navbar -->
+
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+
+            <!-- Sidebar mobile toggler -->
+            <div class="sidebar-mobile-toggler text-center">
+                <a href="#" class="sidebar-mobile-main-toggle">
+                    <i class="icon-arrow-left8"></i>
+                </a>
+                Navigation
+                <a href="#" class="sidebar-mobile-expand">
+                    <i class="icon-screen-full"></i>
+                    <i class="icon-screen-normal"></i>
+                </a>
+            </div>
+            <!-- /sidebar mobile toggler -->
+
+
+            <!-- Sidebar content -->
+            <div class="sidebar-content">
+
+
+
+
+                <!-- Main navigation -->
+                <div class="card card-sidebar-mobile">
+                    <ul class="nav nav-sidebar" data-nav-type="accordion">
+
+                        <!-- Main -->
+                        <li class="nav-item-header">
+                            <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'offender:dashboard'%}" class="nav-link active">
+                                <i class="icon-home4"></i>
+                                <span>
+									Dashboard
+								</span>
+                            </a>
+                        </li>
+
+                        <!-- /main -->
+
+                        <!-- Forms -->
+                        <li class="nav-item-header">
+                            <div class="text-uppercase font-size-xs line-height-xs">Stored record</div> <i class="icon-menu" title="Forms"></i>
+                        </li>
+                        
+                        <li class="nav-item"><a href="{% url 'offender:add_record'%}" class="nav-link"><i class="icon-plus3"></i> <span>Add new record</span></a></li>
+                       
+                        <li class="nav-item"><a href="{% url 'offender:view_record'%}" class="nav-link"><i class="icon-eye"></i> <span>View Records</span></a></li>
+                        <li class="nav-item"><a href="{% url 'offender:block_record'%}" class="nav-link"><i class="icon-user-block"></i> <span>Blocked record</span></a></li>
+
+
+
+                        <!-- /forms -->
+
+                        <li class="nav-item-header">
+                            <div class="text-uppercase font-size-xs line-height-xs">Other</div> <i class="icon-menu" title="Main"></i>
+                        </li>
+
+                        <li class="nav-item"><a href="{% url 'offender:profile' request.user.id%}" class="nav-link"><i class="icon-user"></i> <span>Edit Profile</span></a></li>
+                        <li class="nav-item"><a href="{% url 'offender:recovery_password' request.user.id%}" class="nav-link"><i class="icon-key"></i> <span>Password Recovery</span></a></li>
+
+
+                        <li class="nav-item-header">
+                            <div class="text-uppercase font-size-xs line-height-xs">Referances </div> <i class="icon-menu" title="Main"></i>
+                        </li>
+
+                        <li class="nav-item"><a href="https://webapps.doc.state.nc.us/opi/offendersearch.do?method=view" class="nav-link"><i class="icon-upload"></i> <span>NCD Of Pubic safety</span></a></li>
+                        <li class="nav-item"><a href="https://inmateinquiryweb.mecklenburgcountync.gov/Inmate" class="nav-link"><i class="icon-atom2"></i> <span>MCSO Search Home</span></a></li>
+
+
+                    </ul>
+                </div>
+                <!-- /main navigation -->
+
+            </div>
+            <!-- /sidebar content -->
+
+        </div>
+        <!-- /main sidebar -->
+
+        {% block content %} {% endblock content %}
+
+        <!-- Main content -->
+
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</body>
+
+<!-- Mirrored from demo.interface.club/limitless/demo/Template/layout_1/LTR/default/full/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Feb 2021 03:22:57 GMT -->
+
+</html>

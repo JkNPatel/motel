@@ -1,0 +1,186 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="page-content">
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			
+		<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-home2 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
+							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+		<!-- Content area -->
+			<div class="content">
+
+			
+
+				<!-- Fieldset legend -->
+				<div class="row">
+					<div class="col-md-12">
+
+						<!-- Advanced legend -->
+						<div class="card">
+							<div class="card-header bg-dark header-elements-inline">
+								<h5 class="card-title">Change the details about offender </h5>
+								<div class="header-elements">
+									<div class="list-icons">
+				                		<a class="list-icons-item rotate-180" data-action="collapse"></a>
+				                		<a class="list-icons-item" data-action="reload"></a>
+				                	
+				                	</div>
+			                	</div>
+							</div>
+
+							<div class="card-body">
+								<form action="" method="post" > 
+									{% csrf_token %}
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>First name*</label>
+												<input type="text" name="searchFirstName" maxlength="35" class="form-control" value="{{record_data.off_first_name}}" placeholder="First name" required>
+											</div>
+											
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Last name*</label>
+												<input type="text" name="searchLastName" class="form-control" maxlength="25" value="{{record_data.off_last_name}}" placeholder="Last name" required>
+											</div>
+											
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Birth Date*</label>
+												<input name="searchDOB" maxlength="10" class="form-control" type="date" value="{{record_data.off_birth_date|date:'Y-m-d'}}" name="date" required>
+												{% if birth_date != null %}
+												
+												<label id="basic-error" class="validation-invalid-label" for="searchDOB">This field should be valid.</label>
+												{% endif %} 
+											</div>
+										
+										</div>
+										
+										<div class="col-md-4">
+													
+											<div class="form-group">
+											
+												<label>Gender*</label>
+												<select name="searchGender" class="form-control form-control" required>
+													<option value="" >Select</option>
+													<option value="M" 	{% if record_data.off_gender == 'M' %} selected {% endif %} >Male</option>
+													<option value="F" {% if record_data.off_gender == 'F' %} selected {% endif %}>Female</option>
+													
+												</select>
+											</div>
+											
+										</div>
+										<div class="col-md-4">
+											
+											<div class="form-group">
+											
+												<label>Race*</label>
+												<select name="searchRace" class="form-control form-control" required>
+													<option value="">Select</option>
+													<option value="4" {% if record_data.off_race == '4' %} selected {% endif %}>Asian/Ortl</option>
+													<option value="2" {% if record_data.off_race == '2' %} selected {% endif %} >Black</option>
+													<option value="3" {% if record_data.off_race == '3' %} selected {% endif %} >Indian</option>
+													<option value="5" {% if record_data.off_race == '5' %} selected {% endif %} >Other</option>
+													<option value="6" {% if record_data.off_race == '6' %} selected {% endif %} >Unknown</option>
+													<option value="1" {% if record_data.off_race == '1' %} selected {% endif %} >White</option>
+												</select>
+											</div>
+											
+										</div>
+
+										<div class="col-md-4">
+
+											<div class="form-group">
+	
+												<label>Future preferance*</label>
+												<select name="off_permission" class="form-control form-control" required>
+														<option value="" >Select</option>
+														<option value="A" 	{% if record_data.off_permission == 'A' %} selected {% endif %} >Allow</option>
+														<option value="B" {% if record_data.off_permission == 'B' %} selected {% endif %}>Block</option>
+														
+														
+													</select>
+											</div>
+	
+										</div>
+
+										
+												
+									</div>
+											
+									
+									
+									<div class="text-right">
+										<button type="submit" class="btn btn-dark">Update Now <i class="icon-paperplane ml-2"></i></button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /advanced legend -->
+
+					</div>
+				</div>
+				<!-- /fieldset legend -->
+
+
+			</div>
+			<!-- /content area -->
+
+		
+			<!-- Footer -->
+	<div class="navbar navbar-expand-lg navbar-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+				data-target="#navbar-footer">
+				<i class="icon-unfold mr-2"></i>
+				Footer
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-footer">
+			<span class="navbar-text">
+				Keep searching, Stay Secure
+			</span>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<span class="navbar-text">
+					&copy; 2021 - <a href="#">Offender Search</a> 
+				</span>
+			</ul>
+		</div>
+	</div>
+	<!-- /footer -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+	
+	
+{% endblock content %}
